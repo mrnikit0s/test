@@ -18,6 +18,18 @@ pipeline {
             git branch: 'main', credentialsId: 'github', url: 'https://github.com/mrnikit0s/test'
         }
       }
+
+      stage ('Build Application') {
+        steps {
+            sh "mvn clean package"
+        }
+      }
+
+      stage ('Test Application') {
+        steps {
+            sh "mvn test"
+        }
+      }
     }
       
 }
