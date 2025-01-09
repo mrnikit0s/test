@@ -1,9 +1,13 @@
 pipeline {
     agent{
-        docker { image 'maven:3.9.9-eclipse-temurin-21-alpine' }
+        label "jenkins-agent"
     }
+    tools{
+        jdk 'Java17'
+        maven 'Maven3'
+    } 
     stages{
-      stage ('build') {
+      stage ('A') {
         steps {
             sh 'mvn --version'
         }
