@@ -12,12 +12,12 @@ pipeline {
             cleanWs()
         }
       }
-    }
-    stages{
+
       stage ('Chekout from SCM') {
         steps {
             git branch: 'main', credentialsId: 'github', url: 'https://github.com/mrnikit0s/test'
         }
       }
     }
+      
 }
