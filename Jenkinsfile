@@ -7,9 +7,9 @@ pipeline {
         maven 'Maven3'
     } 
     stages{
-      stage ('A') {
+      stage ('Cleanup Workspace') {
         steps {
-            sh 'mvn --version'
+            cleanWs()
         }
       }
     }
