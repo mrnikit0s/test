@@ -33,6 +33,7 @@ pipeline {
 
       stage ('Sonarqube Analysis ') {
         steps {
+            def scannerHome = tool 'SonarScanner 4.0';
             withSonarQubeEnv(credentialsId: 'sonar')   {
                 sh "mvn sonar:sonar"
             }   
