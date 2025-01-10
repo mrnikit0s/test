@@ -6,6 +6,14 @@ pipeline {
         jdk 'Java17'
         maven 'Maven3'
     } 
+    environment {
+        APP_NAME = "complete-prodcution-e2e-pipeline"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "mrnikit0s"
+        DOCKER_PASS = 'dockerhub'
+        IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}-${env.BUILD_NUMBER}"
+    }
     stages{
       stage ('Cleanup Workspace') {
         steps {
@@ -36,6 +44,11 @@ pipeline {
             withSonarQubeEnv(credentialsId: 'sonar-new', installationName:'sonarqube')   {
                 sh "mvn sonar:sonar"
             }   
+        }
+      }
+      stage('Quality Gate') {
+        steps {
+            waitForQualityGate(abortPipeline: false, credentialsId: 'sonar-new')
         }
       }
     }
