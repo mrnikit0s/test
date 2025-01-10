@@ -51,6 +51,19 @@ pipeline {
             waitForQualityGate(abortPipeline: false, credentialsId: 'sonar-new')
         }
       }
+
+      stage('Build & Push Docker Image') {
+        steps {
+           script {
+            docker.withDockerRegistry('', DOCKER_PASS)
+            docker_image = docker.build "${IMAGE_NAME}"
+           }
+           docker.withDockerRegistry('', DOCKER_PASS){
+            docker_image.push("${IMAGE_TAG}")
+            docker_image.push('latest')
+           }
+        }
+      }
     }
       
 }
