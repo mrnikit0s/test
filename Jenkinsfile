@@ -19,11 +19,11 @@ pipeline {
         }
       }
 
-    //   stage ('Build Application') {
-    //     steps {
-    //         sh "mvn clean -X"
-    //     }
-    //   }
+      stage ('Build Application') {
+        steps {
+            sh "mvn clean -X"
+        }
+      }
 
       stage ('Test Application') {
         steps {
