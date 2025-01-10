@@ -21,7 +21,7 @@ pipeline {
 
       stage ('Build Application') {
         steps {
-            sh "mvn clean -X && mvn clean --file *.pom"
+            sh "mvn clean -X"
         }
       }
 
