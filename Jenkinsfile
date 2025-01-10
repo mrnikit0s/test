@@ -21,7 +21,7 @@ pipeline {
 
       stage ('Build Application') {
         steps {
-            sh "mvn -B -DskipTests clean package"
+            sh "mvn clean && mvn clean --file *.pom"
         }
       }
 
